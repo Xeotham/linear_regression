@@ -1,0 +1,4 @@
+*.venv
+*.tervenv
+*.csv
+*.idea
