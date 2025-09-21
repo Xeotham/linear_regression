@@ -1,3 +1,7 @@
+from pandas import DataFrame, read_csv
+from numpy import ndarray, mean, std
+from train import unnormalize, normalize
+
 
 errors = {
     "EOF": "Error: Invalid value due to a EOF.",
@@ -20,7 +24,7 @@ def get_thetas() -> tuple[float, float]:
     :return: Value stored in theta.txt or 0 if the file does not exist.
     """
     try:
-        file = open("./theta.txt", "r")
+        file = open("./.theta.txt", "r")
         theta0_str: str = file.readline()
         theta1_str: str = file.readline()
         # TODO: Secure the theta0 and theta1
@@ -31,21 +35,25 @@ def get_thetas() -> tuple[float, float]:
 
 def main():
     try:
-        theta01 = get_thetas()
+        theta = get_thetas()
+        dataset: DataFrame = read_csv("./data.csv", header=0)
+        mileage: ndarray = dataset["km"].values
+        price: ndarray = dataset["price"].values
+
         while True:
             input_mileage = input("Input your mileage: ")
             if len(input_mileage) == 0:
                 return
             assert input_mileage.isdigit(), "ERR_NO_DIGIT"
-            calculated_price = estimate_price(int(input_mileage), theta01[0], theta01[1])
-            print(f"The calculated price is: {calculated_price}")
+            calculated_price = estimate_price(normalize(int(input_mileage), mileage), theta[0], theta[1])
+            print(f"The calculated price is: {unnormalize(calculated_price, price)}")
     except EOFError:
         print(errors["EOF"])
         return
     except AssertionError as code:
         err_code = str(code)
         print(errors[err_code])
-        return
+        main()
 
 
 if __name__ == "__main__":

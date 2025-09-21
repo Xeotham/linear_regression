@@ -29,9 +29,9 @@ Once the linear regression has completed, you will save the variables theta0 and
 theta1 for use in the first program.
 
 You will be using the following formulas :
-``tmpθ0 = learningRate ∗ 1 m m−1∑ i=0 (estimatePrice(mileage[i]) − price[i])``
+``tmpθ0 = learningRate ∗ (1/m) m−1∑ i=0 (estimatePrice(mileage[i]) − price[i])``
 
-``tmpθ1 = learningRate ∗ 1 m m−1∑ i=0 (estimatePrice(mileage[i]) − price[i]) ∗ mileage[i]``
+``tmpθ1 = learningRate ∗ (1 m) m−1∑ i=0 (estimatePrice(mileage[i]) − price[i]) ∗ mileage[i]``
 
 I let you guess what m is :)
 
@@ -130,11 +130,11 @@ And we put it together:
 ``an + 1 = an - α * (1/m) m i=0∑x(ax + b - yi)``
 
 Which was give on the subject as:
-``tmpθ1 = learningRate ∗ 1 m m−1∑ i=0 (estimatePrice(mileage[i]) − price[i]) ∗ mileage[i]``
+``tmpθ1 = learningRate ∗ (1/m) m−1∑ i=0 (estimatePrice(mileage[i]) − price[i]) ∗ mileage[i]``
 
 Where `an+1` is `tmpθ1`,  `α` is `learningRate`, `x` is `mileage[i]` and `b` is `price[i]`.
 
 So as we do the same for the derivative of `f` for `b`, we have the second formula provided in the subject:
-``tmpθ0 = learningRate ∗ 1 m m−1∑ i=0 (estimatePrice(mileage[i]) − price[i])``
+``tmpθ0 = learningRate ∗ (1/m) m−1∑ i=0 (estimatePrice(mileage[i]) − price[i])``
 
 We now have all we need to start the project.
