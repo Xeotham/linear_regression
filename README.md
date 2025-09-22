@@ -138,3 +138,12 @@ So as we do the same for the derivative of `f` for `b`, we have the second formu
 ``tmpθ0 = learningRate ∗ (1/m) m−1∑ i=0 (estimatePrice(mileage[i]) − price[i])``
 
 We now have all we need to start the project.
+
+## Bonus
+
+### Matrix
+To do bonus, i chose to remake the linear regression with matrix. Why ?
+
+Because with it, i can make **Linear regression** **AND** **Polynomial Regression**.
+
+[Here is the video explaining it (it's french)](https://www.youtube.com/watch?v=8Y3r7F47Xfo&list=PLO_fdPEVlfKqUF5BPKjGSh7aV9aBshrpY)
