@@ -1,6 +1,6 @@
 from pandas import DataFrame, read_csv
 from numpy import ndarray, mean, std, array
-from train import unnormalize, normalize
+from regression import unnormalize, normalize
 
 
 errors = {
