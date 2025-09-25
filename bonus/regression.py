@@ -1,8 +1,7 @@
 from pandas import read_csv, DataFrame
 from pandas.errors import EmptyDataError
 from matplotlib.pyplot import show, pause, subplots
-from numpy import ndarray, mean, std, hstack, ones, sum, array, zeros
-from numpy.random import randn
+from numpy import ndarray, mean, std, hstack, sum, array, zeros
 from sys import argv
 from getopt import getopt, GetoptError
 
@@ -25,19 +24,51 @@ class Arguments:
 
 input_args = Arguments
 
-def cost_function(m: int, X: ndarray, theta: ndarray, Y: ndarray):
+def cost_function(m: int, X: ndarray, theta: ndarray, Y: ndarray) -> float:
+    """
+    Mean squared error.
+    :param m: Size of the list.
+    :param X: Matrix X.
+    :param theta: Thetas.
+    :param Y: Matrix Y.
+    :return: Value of the mean squared error.
+    """
     return (1 / (2 * m)) * sum((model(X, theta) - Y) ** 2)
 
 
 def model(X: ndarray, theta: ndarray):
+    """
+    Model to calculate
+    :param X:
+    :param theta:
+    :return:
+    """
     return X.dot(theta)
 
 
 def gradient(theta: ndarray, m: int, X: ndarray, Y: ndarray):
+    """
+    Function to calculate the gradient.
+    :param theta: Thetas.
+    :param m: Size of the Array.
+    :param X: Matrix X.
+    :param Y: Matrix Y.
+    :return: Calcul of the gradient for  theta0 and theta1.
+    """
     return (1 / m) * X.T.dot((model(X, theta) - Y))
 
 
 def gradient_descent(m: int, X: ndarray, Y: ndarray, learning_rate: float, max_iter: int, tol: float):
+    """
+    Function to make the gradient descent.
+    :param m: Size of the Array.
+    :param X: Matrix X.
+    :param Y: Array Y.
+    :param learning_rate: Learning Rate.
+    :param max_iter: Maximum number of iteration.
+    :param tol: Tolerance.
+    :return: Value of theta.
+    """
     theta: ndarray = zeros((len(X[0]), 1))
     previous_cost = float("inf")
 
@@ -58,6 +89,11 @@ def gradient_descent(m: int, X: ndarray, Y: ndarray, learning_rate: float, max_i
 
 
 def create_X(x):
+    """
+    Function to create the Matrix X.
+    :param x: The x array.
+    :return: Newly create array X.
+    """
     X = x ** 0
 
     for i in range(input_args.regression_value - 1, -1, -1):
@@ -66,6 +102,15 @@ def create_X(x):
 
 
 def regression(x: ndarray, y: ndarray, learning_rate: float, max_iter: int, tol: float):
+    """
+    Function to launch the Linear Regression.
+    :param x: Array x.
+    :param y: Array y.
+    :param learning_rate: Learning Rate.
+    :param max_iter: Maximum number of iteration.
+    :param tol: Tolerance of the Linear Regression.
+    :return:
+    """
     X = create_X(x)
     m = len(x)
 
@@ -78,14 +123,33 @@ def regression(x: ndarray, y: ndarray, learning_rate: float, max_iter: int, tol:
 
 
 def unnormalize(value, base):
+    """
+    Function to unnormalize a value.
+    :param value: Value to unnormalize
+    :param base: List to unnormalize with.
+    :return: Unnormalized value.
+    """
     return (value * std(base)) + mean(base)
 
 
 def normalize(value, base):
+    """
+    Function to normalize a value based on a list.
+    :param value: Value to normalize.
+    :param base: List to normalize with.
+    :return: Normalized value.
+    """
     return (value - mean(base)) / std(base)
 
 
 def predict(theta, x, y):
+    """
+    Function to predict input mileage based on calculated Theta.
+    :param theta:
+    :param x:
+    :param y:
+    :return:
+    """
     try:
         while True:
             input_mileage = input("Input your mileage: ")
@@ -96,7 +160,7 @@ def predict(theta, x, y):
             normalized_value = normalize(int(input_mileage), x)
             parsed_input = array([[normalized_value, 1]])
             calculated_price = model(parsed_input, theta)
-            print(f"The calculated price is: {unnormalize(calculated_price[0][0], y)}")
+            print(f"The calculated price is: {int(unnormalize(calculated_price[0][0], y))}")
     except EOFError:
         print("\n",errors["EOF"], sep="")
         return
@@ -107,6 +171,14 @@ def predict(theta, x, y):
 
 
 def plot_handle(X: ndarray, x: ndarray, y: ndarray, theta: ndarray = array([0])):
+    """
+    Function to handle the plot parameter.
+    :param X: Matrix X
+    :param x: Matrix x
+    :param y: Matrix y
+    :param theta: Theta
+    :return:
+    """
     fig, ax = subplots()
     ax.set_xlabel("Mileage")
     ax.set_ylabel("Price")
