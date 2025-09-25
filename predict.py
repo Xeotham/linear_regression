@@ -63,6 +63,8 @@ def main():
             return main()
     except KeyboardInterrupt:
         print(errors["ERR_INT"])
+    except FileNotFoundError as err:
+        print(str(err))
 
 
 if __name__ == "__main__":
