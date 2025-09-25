@@ -1,4 +1,5 @@
 from pandas import DataFrame, read_csv
+from pandas.error import EmptyDataError
 from numpy import ndarray, mean, std, array
 from regression import unnormalize, normalize
 
@@ -85,6 +86,8 @@ def main():
     except KeyboardInterrupt:
         print(errors["ERR_INT"])
     except FileNotFoundError as err:
+        print(str(err))
+    except EmptyDataError as err:
         print(str(err))
 
 
