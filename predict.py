@@ -1,5 +1,5 @@
 from pandas import DataFrame, read_csv
-from pandas.error import EmptyDataError
+from pandas.errors import EmptyDataError
 from numpy import ndarray, mean, std
 from train import unnormalize, normalize
 
